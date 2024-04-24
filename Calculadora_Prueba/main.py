@@ -1,8 +1,11 @@
 import tkinter as tk
+import math
 
 calculation = ""
 
 def addCalculation(symbol):
+
+    
     global calculation
     calculation += str(symbol)
     text_result.delete(1.0, "end")
@@ -25,6 +28,18 @@ def evaluateCalculation():
         text_result.insert(1.0, "end")
         pass
 
+def squareRoot():
+    global calculation
+    try:
+        result = str(math.sqrt(float(calculation)))
+        calculation = ""
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, result)
+    except Exception as e:
+        clearField()
+        text_result.insert(1.0, "Error")
+        pass
+
 def clearField():
     global calculation
     calculation=""
@@ -35,9 +50,9 @@ def clearField():
 root = tk.Tk()
 root.geometry("375x275")
 
-text_result = tk.Text(root, height=2, width=19, font=("Arial", 24))#16 originalmente
+text_result = tk.Text(root, height=1, width=19, font=("Arial", 24))#16 originalmente
 text_result.grid(columnspan=6)#5 columnas originalmente
-
+root.title("Calculadora")
 
 btn_7 = tk.Button(root, text="7", command=lambda: addCalculation(7), width=5, font="Arial, 14")
 btn_7.grid(row=2, column=1)
@@ -85,7 +100,7 @@ btn_plus.grid(row=4, column=4, rowspan=2, sticky="ns")
 #    e: El widget se pega al lado derecho de la celda.
 #    w: El widget se pega al lado izquierdo de la celda.
 
-btn_X = tk.Button(root, text="x", command=lambda: addCalculation("x"), width=5, font="Arial, 14")
+btn_X = tk.Button(root, text="x", command=lambda: addCalculation("*"), width=5, font="Arial, 14")
 btn_X.grid(row=3, column=4)
 
 btn_percent = tk.Button(root, text="%", command=lambda: addCalculation("%"), width=5, font="Arial, 14")
@@ -97,14 +112,11 @@ btn_equal.grid(row=5, column=5)
 btn_minus= tk.Button(root, text="-", command=lambda: addCalculation("-"), width=5, font="Arial, 14")
 btn_minus.grid(row=4, column=5)
 
-btn_div= tk.Button(root, text="\u00F7", command=lambda: addCalculation("\u00F7"), width=5, font="Arial, 14")#unicodes
+btn_div= tk.Button(root, text="\u00F7", command=lambda: addCalculation("/"), width=5, font="Arial, 14")#unicodes
 btn_div.grid(row=3, column=5)
 
-btn_raiz= tk.Button(root, text="\u221A", command=lambda: addCalculation("\u221A"), width=5, font="Arial, 14")#unicodes
-btn_raiz.grid(row=2, column=5)
-
-
-
+btn_sqrt = tk.Button(root, text="√", command=squareRoot, width=5, font="Arial, 14")
+btn_sqrt.grid(row=2, column=5)
 
 
 root.mainloop()
