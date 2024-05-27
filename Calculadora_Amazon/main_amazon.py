@@ -1,5 +1,7 @@
 import tkinter as tk
+import time
 
+start_time = time.time()
 class Calculator:
     def __init__(self, master):
         self.master = master
@@ -53,6 +55,12 @@ class Calculator:
         else:
             self.entry.insert(tk.END, text)
 
+
 root = tk.Tk()
 calculator = Calculator(root)
+root.update_idletasks()
+end_time = time.time()
+
+print(f"Tiempo de inicio del programa: {end_time - start_time} segundos")
+
 root.mainloop()

@@ -1,6 +1,7 @@
 import tkinter as tk
 import math
-
+import time
+start_time = time.time()
 calculation = ""
 
 def addCalculation(symbol):
@@ -118,5 +119,9 @@ btn_div.grid(row=3, column=5)
 btn_sqrt = tk.Button(root, text="√", command=squareRoot, width=5, font="Arial, 14")
 btn_sqrt.grid(row=2, column=5)
 
+root.update_idletasks()
+end_time = time.time()
+
+print(f"Tiempo de inicio del programa: {end_time - start_time} segundos")
 
 root.mainloop()
